@@ -47,7 +47,7 @@ BST.prototype.search = function(newFunction) {
   function helper(node) {
     if (node !== null) {
       helper(node.left);
-      newFunction.call(this, node);
+      newFunction.call(node);
       helper(node.right);
     }
   }
@@ -59,7 +59,7 @@ BST.prototype.counter = function() {
   this.search(function() {
     localCount++;
   });
-  console.log(localCount);
+  return localCount;
 };
 
 BST.prototype.edgeCounter = function(node) {
@@ -72,7 +72,7 @@ BST.prototype.edgeCounter = function(node) {
     }
   };
   helper(node);
-  console.log(edgeCount - 1);
+  return edgeCount - 1;
 };
 
 BST.prototype.min = function() {
@@ -80,7 +80,7 @@ BST.prototype.min = function() {
   while (current.left !== null) {
     current = current.left;
   }
-  console.log(current.data);
+  return current.data;
 };
 
 BST.prototype.max = function() {
@@ -88,7 +88,7 @@ BST.prototype.max = function() {
   while (current.right !== null) {
     current = current.right;
   }
-  console.log(current.data);
+  return current.data;
 };
 
 BST.prototype.inOrder = function(node) {
@@ -99,15 +99,4 @@ BST.prototype.inOrder = function(node) {
   }
 };
 
-var tree = new BST();
-tree.insert(23);
-tree.insert(45);
-tree.insert(16);
-tree.insert(37);
-tree.insert(3);
-tree.insert(99);
-tree.insert(22);
-tree.counter(tree.root);
-tree.edgeCounter(tree.root);
-tree.min();
-tree.max();
+module.exports = BST;
