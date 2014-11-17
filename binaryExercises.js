@@ -132,3 +132,5 @@ BST.prototype.findInFile = function(filePath, wantedWord) {
 };
 
 module.exports = BST;
+
+//collaborated some with my husband Justin Graham and Stephanie
