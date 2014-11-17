@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 function Node(data, left, right) {
   this.data = data;
   this.left = left;
@@ -97,6 +99,36 @@ BST.prototype.inOrder = function(node) {
     console.log(node.show() + ' ');
     this.inOrder(node.right);
   }
+};
+
+BST.prototype.findWord = function(wantedWord) {
+  var wordContainer = [];
+  function helper(node) {
+    if (node) {
+      if (node.left !== null) {
+        helper(node.left);
+      }
+      if (node.data == wantedWord) {
+        wordContainer.push(node.data);
+      }
+      if (node.right !== null) {
+        helper(node.right);
+      }
+    }
+  }
+  helper(this.root);
+  return wordContainer;
+};
+
+BST.prototype.findInFile = function(filePath, wantedWord) {
+  var contents = fs.readFileSync(filePath).toString();
+  var strArray = contents.split(' ');
+  for (var i = 0; i < strArray.length; i++) {
+    var word = strArray[i].trim()
+      .replace(',', '').replace('.', '').replace('\'s', '');
+    this.insert(word);
+  }
+  return this.findWord(wantedWord).length;
 };
 
 module.exports = BST;

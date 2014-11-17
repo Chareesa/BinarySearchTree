@@ -15,6 +15,8 @@ describe('Testing binary tree', function() {
   tree.insert(99);
   tree.insert(22);
 
+  var txtFileBst = new BST();
+
   it('counter() should return total node count', function() {
     expect(tree.counter(tree.root)).to.eql(7);
   });
@@ -29,5 +31,9 @@ describe('Testing binary tree', function() {
 
   it('max() should return node with the highest data', function() {
     expect(tree.max()).to.eql(99);
+  });
+
+  it('findInFile should return a word count from example txt file', function() {
+    expect(txtFileBst.findInFile('./textFile.txt', 'time')).to.eql(5);
   });
 });
